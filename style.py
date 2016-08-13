@@ -58,7 +58,7 @@ def gram_matrix(activations):
     width = tf.shape(activations)[2]
     num_channels = tf.shape(activations)[3]
     gram_matrix = tf.transpose(activations, [0, 3, 1, 2]) 
-    gram_matrix = tf.reshape(gram_matrix, [num_channels, width * height])
+    gram_matrix = tf.reshape(gram_matrix, tf.pack([num_channels, width * height]))
     gram_matrix = tf.matmul(gram_matrix, gram_matrix, transpose_b=True)
     return gram_matrix
 
