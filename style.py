@@ -13,6 +13,7 @@ import numpy as np
 import tensorflow as tf
 import vgg
 from PIL import Image
+from tqdm import *
 
 def load_image(path, shape=None, scale=1.0):
     img = Image.open(path)
@@ -141,7 +142,7 @@ train = tf.train.AdamOptimizer(learning_rate=0.05).minimize(overall_loss)
 init = tf.initialize_all_variables()
 sess.run(init)
 min_loss, best_image = float("inf"), None
-for i in xrange(0,500):
+for i in tqdm(xrange(0,500)):
     image, loss, _ = sess.run([output_image, overall_loss, train])
     if i % 5 == 0:
         print 'Iteration {}: {}'.format(i, loss)
